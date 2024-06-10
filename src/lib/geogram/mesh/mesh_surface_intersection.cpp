@@ -56,6 +56,7 @@
 
 #include <sstream>
 #include <stack>
+#include <random>
 
 #ifdef GEO_COMPILER_CLANG
 // I'm using long long 
@@ -522,7 +523,8 @@ namespace GEO {
             for(index_t f: mesh_.facets) {
                 reorder[f] = f;
             }
-            std::random_shuffle(reorder.begin(), reorder.end());
+            std::random_device rd;
+            std::shuffle(reorder.begin(), reorder.end(), rd);
             for(IsectInfo& II: intersections) {
                 II.f1 = reorder[II.f1];
                 II.f2 = reorder[II.f2];
